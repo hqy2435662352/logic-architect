@@ -2,13 +2,72 @@
 
 English | [简体中文](README.zh-CN.md)
 
-A pre-execution reasoning skill that challenges hidden assumptions, aligns complex requirements, and maps them into execution-ready structures using the **M.E.N. framework**:
+**Logic Architect** is a pre-execution reasoning skill that forces complex requests to expose their hidden logic **before** implementation.
 
+It uses the **M.E.N. framework**:
 - **M — Metadata**
 - **E — Essence**
 - **N — Non-linear**
 
-Logic Architect is designed for cases where executing too early would lock in flawed assumptions.
+> Most complex prompts do not fail during execution. They fail because execution starts before the logic is aligned.
+
+![Logic Architect Workflow](assets/logic-architect-workflow.png)
+
+## Why it matters
+
+Logic Architect is built for tasks where a wrong early assumption can corrupt everything downstream:
+- multi-agent workflows
+- business rule systems
+- prompt / skill design
+- orchestration logic
+- stateful processes with rollback, conflict, or partial completion
+
+Instead of immediately generating code, prompts, or workflows, it introduces a **pre-execution reasoning layer** that:
+- challenges the highest-risk hidden assumption
+- models the request through **Metadata / Essence / Non-linear**
+- maps the result into an execution-ready structure
+
+## In 20 seconds
+
+**Input:**
+> Design a workflow where one agent writes code, one reviews it, and one merges it automatically.
+
+**Logic Architect immediately asks:**
+- What breaks the deadlock if review loops forever?
+- Who has final authority to merge?
+- What is the minimum valid state before merge is legal?
+
+**Then it aligns the logic:**
+- **M:** writer → reviewer → merger, with branch/review state as source of truth
+- **E:** unverified code must never merge automatically
+- **N:** after 3 failed review cycles, escalate to a human instead of looping forever
+- **Execution Mapping:** add retry limits, escalation path, and final validation gate
+
+## Quick install
+
+### Claude Code
+
+Install as a user skill:
+
+```bash
+mkdir -p ~/.claude/skills/logic-architect
+cp SKILL.md ~/.claude/skills/logic-architect/SKILL.md
+```
+
+Or install as a project skill:
+
+```bash
+mkdir -p .claude/skills/logic-architect
+cp SKILL.md .claude/skills/logic-architect/SKILL.md
+```
+
+### GitHub install shortcut
+
+Clone directly into your Claude skills directory:
+
+```bash
+git clone https://github.com/YOURNAME/logic-architect.git ~/.claude/skills/logic-architect
+```
 
 ---
 
