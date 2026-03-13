@@ -221,6 +221,64 @@ This usually includes:
 
 ---
 
+
+## Installation
+
+### Claude Code
+
+Claude Code loads skills from a directory that contains a `SKILL.md` entrypoint. According to the Claude Code docs, personal skills live at `~/.claude/skills/<skill-name>/SKILL.md`, project skills live at `.claude/skills/<skill-name>/SKILL.md`, and each skill is a directory with `SKILL.md` as the entrypoint.
+
+#### Option A: Install as a personal skill
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/<your-name>/logic-architect.git ~/.claude/skills/logic-architect
+```
+
+This should result in:
+
+```text
+~/.claude/skills/logic-architect/
+└── SKILL.md
+```
+
+#### Option B: Install as a project-local skill
+
+From your project root:
+
+```bash
+mkdir -p .claude/skills
+git clone https://github.com/<your-name>/logic-architect.git .claude/skills/logic-architect
+```
+
+This should result in:
+
+```text
+.claude/skills/logic-architect/
+└── SKILL.md
+```
+
+#### Option C: Download ZIP instead of cloning
+
+If you download the repository as a ZIP archive from GitHub, extract it first, then move the extracted folder into your Claude skills directory and make sure the final installed path is:
+
+```text
+~/.claude/skills/logic-architect/SKILL.md
+```
+
+or:
+
+```text
+.claude/skills/logic-architect/SKILL.md
+```
+
+The outer folder matters. `SKILL.md` should not sit directly under `~/.claude/skills/`; it should live inside a dedicated `logic-architect/` folder.
+
+### Why the repository name matters
+
+Yes — when someone clones the GitHub repository, Git creates a local clone as a directory at the location they choose. That means a repository named `logic-architect` naturally maps to the outer skill folder you want. If someone downloads a ZIP instead, they will still get a folder of repository contents after extraction, but they should rename or move it so the final Claude skill path is exactly `.../logic-architect/SKILL.md`.
+
+
 ## Output Shape
 
 A typical output looks like this:
@@ -279,7 +337,9 @@ A typical output looks like this:
 .
 ├── SKILL.md
 ├── README.md
+├── README.zh-CN.md
 ├── LICENSE
+├── CHANGELOG.md
 └── examples/
     ├── example-agent-workflow.md
     └── example-business-logic.md

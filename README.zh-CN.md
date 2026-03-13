@@ -215,6 +215,64 @@ Logic Architect 的整体流程如下：
 
 ---
 
+
+## 安装方式
+
+### Claude Code
+
+Claude Code 的官方文档说明：Skill 必须放在一个单独目录里，并且以 `SKILL.md` 作为入口文件。个人级 Skill 的路径是 `~/.claude/skills/<skill-name>/SKILL.md`，项目级 Skill 的路径是 `.claude/skills/<skill-name>/SKILL.md`。
+
+#### 方式 A：安装为个人 Skill
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/<你的用户名>/logic-architect.git ~/.claude/skills/logic-architect
+```
+
+安装完成后应当是：
+
+```text
+~/.claude/skills/logic-architect/
+└── SKILL.md
+```
+
+#### 方式 B：安装为项目内 Skill
+
+在你的项目根目录执行：
+
+```bash
+mkdir -p .claude/skills
+git clone https://github.com/<你的用户名>/logic-architect.git .claude/skills/logic-architect
+```
+
+安装完成后应当是：
+
+```text
+.claude/skills/logic-architect/
+└── SKILL.md
+```
+
+#### 方式 C：下载 ZIP 再安装
+
+如果不是用 `git clone`，而是从 GitHub 直接下载 ZIP，那么先解压，再把解压出来的文件夹移动到 Claude 的 skills 目录下，并确保最终路径是：
+
+```text
+~/.claude/skills/logic-architect/SKILL.md
+```
+
+或者：
+
+```text
+.claude/skills/logic-architect/SKILL.md
+```
+
+注意外层文件夹是必须的。`SKILL.md` 不能直接扔在 `~/.claude/skills/` 下面，而应该放在独立的 `logic-architect/` 目录里。
+
+### 为什么仓库名很重要
+
+是的，仓库下载下来本质上就会是一整个项目目录。用 `git clone` 时，Git 会在你指定的位置创建一个本地副本目录，所以仓库名 `logic-architect` 天然就适合作为 Skill 的外层目录。若使用 ZIP 下载，解压后也会得到一整个仓库文件夹；你只需要把它重命名或移动到正确位置，确保最终变成 `.../logic-architect/SKILL.md` 即可。
+
+
 ## 输出形态
 
 一个典型输出大致会长这样：
@@ -275,6 +333,7 @@ Logic Architect 的整体流程如下：
 ├── README.md
 ├── README.zh-CN.md
 ├── LICENSE
+├── CHANGELOG.md
 └── examples/
     ├── example-agent-workflow.md
     └── example-business-logic.md
